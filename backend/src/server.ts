@@ -1,4 +1,5 @@
 import express from 'express'
+import { convertDecimalToRomanSSE } from './controller'
 
 const app = express()
 
@@ -46,4 +47,4 @@ app.listen(port, () => {
   console.log(`🚀 server listening on http://localhost:${port}`)
 })
 
-
+app.get('/api/decimal-to-roman-sse', convertDecimalToRomanSSE)
