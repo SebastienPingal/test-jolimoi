@@ -2,6 +2,34 @@ import express from 'express'
 
 const app = express()
 
+// parse json bodies
+app.use(express.json())
+
+// basic CORS middleware allowing the frontend dev server
+app.use((req, res, next) => {
+  const allowedOrigin = 'http://localhost:5173'
+  const requestOrigin = req.headers.origin
+
+  if (requestOrigin === allowedOrigin) {
+    res.setHeader('Access-Control-Allow-Origin', allowedOrigin)
+  }
+
+  res.setHeader('Vary', 'Origin')
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    (req.headers['access-control-request-headers'] as string) || 'Content-Type'
+  )
+  res.setHeader('Access-Control-Max-Age', '600')
+
+  if (req.method === 'OPTIONS') {
+    // 🛟 preflight handled
+    return res.status(204).end()
+  }
+
+  next()
+})
+
 // simple emoji logger middleware
 app.use((req, _res, next) => {
   // 🧭 request log
