@@ -1,4 +1,5 @@
 import express from 'express'
+import { convertDecimalToRoman } from './controller'
 
 const app = express()
 
@@ -46,4 +47,5 @@ app.listen(port, () => {
   console.log(`🚀 server listening on http://localhost:${port}`)
 })
 
+app.post('/api/decimal-to-roman', convertDecimalToRoman)
 
