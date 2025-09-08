@@ -6,6 +6,7 @@ const romanNumber = ref('')
 
 const convertToRoman = () => {
   console.log('convertToRoman', decimalnumber.value)
+  romanNumber.value = decimalnumber.value.toString()
 }
 </script>
 
@@ -15,6 +16,6 @@ const convertToRoman = () => {
   <div class="card flex flex-col gap-2">
     <input type="number" v-model="decimalnumber" />
     <button @click="convertToRoman">Convert</button>
-    <p>{{ romanNumber }}</p>
+    <p v-if="romanNumber">{{ romanNumber }}</p>
   </div>
 </template>
